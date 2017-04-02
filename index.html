@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>JS-3 Assignment </title>
+
+    <style>
+    body {
+      text-align: center;
+      background: #f0f8ff;
+    }
+      section{
+        border: 10px solid;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+
+
+   
+<section>
+
+    <h1>Prime Checker</h1>
+                <p id="result">
+                    Enter a number in the box.
+                </p>
+                <input id="number" value="0"  onclick="this.select()" />
+                <input type="button" value="Check" onclick="checkNumber()" />
+                
+</section>
+    <!-- factorial -->
+
+<section>
+    <h1>Factorial</h1>
+
+    Enter Num: <input id="num">
+<button onclick="show()">Factorial</button>
+<input id="answer">
+</section>
+
+<!-- fibonacci -->
+<section>
+<h1>Fibonacci </h1>
+<input type="text" id="inputtext">
+<br><br>
+<input type="button" value="Find out" id="btn">
+<br><br>
+<b id="ID"></b>
+
+</section>
+
+ <script language="JavaScript">
+    //Prime Checker
+
+    function checkNumber() {
+                        var number = document.getElementById("number").value;
+                        if (!isNaN(number)) {
+                            if (isPrime(number)) {
+                                document.getElementById("result").innerHTML = number + " is prime!";
+                            }
+                            else {
+                                document.getElementById("result").innerHTML = number + " is not prime.";
+                            }
+                        }
+                        else {
+                            document.getElementById("result").innerHTML = "Please enter a number.";
+                        }
+                    }
+                    function isPrime(n) {
+
+                        // If n is less than 2 then by definition cannot be prime.
+                        if (n < 2) {return false}
+                        if (n != Math.round(n)) {return false}
+                        // Now assume that n is prime, we will try to prove that it is not.
+                        var isPrime = true;
+
+                        // Now check every whole number from 2 to the square root of n. If any of these divides n exactly, n cannot be prime.
+                        for (var i = 2; i <= Math.sqrt(n); i++) {
+                            if (n % i == 0) {isPrime = false}
+                        }
+
+                        // Finally return whether n is prime or not.
+                        return isPrime;
+
+                    }
+
+    //Factorial
+
+    function show(){
+
+      var i, no, fact;
+      fact=1;
+      no=Number(document.getElementById("num").value);
+      for(i=1; i<=no; i++)
+      {
+        fact= fact*i;
+      }
+      document.getElementById("answer").value= fact;
+      }
+
+
+    //fibonacci
+    function add(a, b) {
+   while (a.length < b.length) a.unshift(0);
+   while (a.length > b.length) b.unshift(0);
+   var carry = 0,
+       sum = [];
+   for (var i = a.length - 1; i >= 0; i--) {
+       var s = a[i] + b[i] + carry;
+       if (s >= 10) {
+           s = s - 10;
+           carry = 1;
+       } else {
+           carry = 0;
+       }
+       sum.unshift(s);
+   }
+   if (carry) sum.unshift(carry);
+   return sum;
+}
+
+function fib(n) {
+   var f1 = [0];
+   var f2 = [1];
+
+   while (n--) {
+       var f3 = add(f1, f2);
+       f1 = f2;
+       f2 = f3;
+   }
+   return f1.join("");
+}
+
+document.getElementById("btn").onclick = function () {
+       var inputnum = parseFloat(document.getElementById("inputtext").value);
+       document.getElementById("ID").innerHTML = fib(inputnum).toString();
+};
+
+    </script>
+
+  </body>
+</html>
